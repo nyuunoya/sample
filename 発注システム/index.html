@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>発注システム</title>
+</head>
+<body>
+  <div id="app">
+    <h2>商品一覧</h2>
+    発注者名
+    <input type="text" v-model="account">
+    <table>
+     <tr>
+       <th>商品コード</th>
+       <th>分類</th>
+       <th>商品名</th>
+       <th>価格</th>
+       <th>発注数</th>
+       <th>発注金額</th>
+     </tr>
+     <tr v-for="(product, index) in productList" :key="product.id">
+       <td>{{ product.code }}</td>
+       <td>{{ product.category }}</td>
+       <td>{{ product.name }}</td>
+       <td style="text-align: right;">￥{{ product.price.toLocaleString() }}</td>
+       <td><input type="number" v-model="product.orderQuantity" @input="calculateOrderAmount(product, index)"></td>
+       <td style="text-align: right;">￥{{ product.orderAmount.toLocaleString() }}</td>
+     </tr>
+   </table>
+   <div style="font-size: 24px;text-align: right;">
+     小計：￥{{subtotal.toLocaleString()}}<br>
+     消費税：￥{{tax.toLocaleString()}}<br>
+     合計：￥{{(subtotal+tax).toLocaleString()}}
+   </div>
+   <p>
+
+   </p>
+   <div style="text-align: center;">
+    <button type="submit" style="font-size: 24px; padding: 10px 20px;" @click="placeOrder" >発注する</button>
+   </div>
+   <div>
+    <h2>発注履歴</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>発注番号</th>
+          <th>発注日時</th>
+          <th>発注者</th>
+          <th>明細</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(order, index) in orderHistory" :key="index">
+          <td>{{ order.id }}</td>
+          <td>{{ order.timestamp }}</td>
+          <td>{{ order.account }}</td>
+          <td><button @click="openOrderDetailsWindow(order.id)">明細を見る</button></td>
+        </tr>
+      </tbody>
+    </table>
+   </div>
+  </div>
+
+  <!-- Vue.js CDNを使ってVueを読み込み -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+  <!-- Vueインスタンスの作成 -->
+  <script src="app.js"></script>
+</body>
+</html>
