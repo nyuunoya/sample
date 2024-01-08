@@ -1,0 +1,23 @@
+body{
+    width: 1000px;
+    margin: 0 auto;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+  }
+
+  th {
+    background-color: aqua;
+  }
+
+  input[type="number"] {
+    height: 20px;
+    width: 50px;
+  }
