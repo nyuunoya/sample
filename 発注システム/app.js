@@ -88,14 +88,8 @@ new Vue({
             amount: product.orderAmount,
           }));
     
-        this.orderDetail.unshift(...orderDetails);
-            
-          
-          
-
+          this.orderDetail.unshift(...orderDetails);
           window.alert("発注しました。");
-          // ここに実際の発注処理を追加する
-
         } 
         else {
           // キャンセルされた場合の処理
@@ -108,7 +102,14 @@ new Vue({
         const orderDetails = this.orderDetail.filter(detail => detail.orderId === orderId);
     
         // 新しいウィンドウを開く
-        const orderDetailsWindow = window.open('', '_blank', 'width=1000,height=400');
+        const orderDetailsWindow = window.open('', '_blank', 'width=1050,height=400');
+
+        // 新しいウィンドウに閉じるボタンを追加
+        const closeButton = orderDetailsWindow.document.createElement('button');
+        closeButton.textContent = '閉じる';
+        closeButton.addEventListener('click', () => orderDetailsWindow.close());
+        orderDetailsWindow.document.body.appendChild(closeButton);
+
         // CSSファイルを読み込む
         const link = orderDetailsWindow.document.createElement('link');
         link.rel = 'stylesheet';
@@ -138,6 +139,10 @@ new Vue({
             `).join('')}
           </tbody>
         </table>
+        <p></p>
+        <div style="text-align: center;">
+        <button style="font-size: 24px; padding: 10px 20px;" onclick="window.close()">閉じる</button>
+        </div>
       `;
     
         // 新しいウィンドウにHTMLを挿入
