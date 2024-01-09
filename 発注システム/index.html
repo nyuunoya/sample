@@ -12,12 +12,12 @@
     <input type="text" v-model="account">
     <table>
      <tr>
-       <th>商品コード</th>
-       <th>分類</th>
+       <th style="width: 180px;">商品コード</th>
+       <th style="width: 60px;">分類</th>
        <th>商品名</th>
        <th>価格</th>
        <th>発注数</th>
-       <th>発注金額</th>
+       <th style="width: 180px;">発注金額</th>
      </tr>
      <tr v-for="(product, index) in productList" :key="product.id">
        <td>{{ product.code }}</td>
